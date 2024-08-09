@@ -13,30 +13,34 @@
 		exclusive = "spicc1", "GPIOH_4", "GPIOH_5", "GPIOH_6", "GPIOH_7";
 		description = "Enable FBTFT on SPI-B.";
 	};
-};
 
-&spicc1 {
-        	#address-cells = <1>;
-        	#size-cells = <0>;
-        	pinctrl-0 = <&spicc1_pins>;
-        	pinctrl-names = "default";
-        	cs-gpios = <&gpio GPIOH_6 GPIO_ACTIVE_LOW>;
-        	status = "okay";
-        	st7735r@0 {
-        		compatible = "sitronix,st7735r";
-        		status = "okay";
-        		reg = <0>;
-        		spi-max-frequency = <10000000>;
-                        width = <128>;
-                        height = <160>;
-                        buswidth = <8>;
-                        fps = <10>;
-                        rotate = <270>;
-                        debug = <1>;
+	fragment@0 {
+		target = <&spicc1>;
 
-                        // configure pin assigment below
-                        reset-gpios = <&gpio GPIOH_8 GPIO_ACTIVE_LOW>;	// <0x2b 8  1>;	// pin 36
-                        dc-gpios    = <&gpio GPIOX_9 GPIO_ACTIVE_LOW>;	// <0x2b 74 0>;	// pin 12
-                        led-gpios   = <&gpio GPIOX_8 GPIO_ACTIVE_LOW>;	// <0x2b 73 0>;	// pin 18
-        	};
+		__overlay__ {
+	        	#address-cells = <1>;
+	        	#size-cells = <0>;
+	        	pinctrl-0 = <&spicc1_pins>;
+	        	pinctrl-names = "default";
+	        	cs-gpios = <&gpio GPIOH_6 GPIO_ACTIVE_LOW>;
+	        	status = "okay";
+	        	st7735r@0 {
+	        		compatible = "jianda,jd-t18003-t01";
+	        		status = "okay";
+	        		reg = <0>;
+	        		spi-max-frequency = <10000000>;
+	                        width = <128>;
+	                        height = <160>;
+	                        buswidth = <8>;
+	                        fps = <10>;
+	                        rotate = <270>;
+	                        debug = <1>;
+	
+	                        // configure pin assigment below
+	                        reset-gpios = <&gpio GPIOH_8 GPIO_ACTIVE_HIGH>;	// <0x2b 8  1>;	// pin 36
+	                        dc-gpios    = <&gpio GPIOX_9 GPIO_ACTIVE_HIGH>;	// <0x2b 74 0>;	// pin 12
+	                        led-gpios   = <&gpio GPIOX_8 GPIO_ACTIVE_HIGH>;	// <0x2b 73 0>;	// pin 18
+	        	};
+		};
+	};
 };
