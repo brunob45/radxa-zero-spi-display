@@ -37,7 +37,7 @@
 	                        debug = <1>;
 	
 	                        // configure pin assigment below
-	                        reset-gpios = <&gpio GPIOH_8 GPIO_ACTIVE_HIGH>;	// <0x2b 8  1>;	// pin 36
+	                        reset-gpios = <&gpio GPIOC_7 GPIO_ACTIVE_LOW>;	pin 22
 	                        dc-gpios    = <&gpio GPIOX_9 GPIO_ACTIVE_HIGH>;	// <0x2b 74 0>;	// pin 12
 	                        led-gpios   = <&gpio GPIOX_8 GPIO_ACTIVE_HIGH>;	// <0x2b 73 0>;	// pin 18
 	        	};
